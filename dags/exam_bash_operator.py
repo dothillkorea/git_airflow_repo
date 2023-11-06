@@ -14,7 +14,7 @@ with DAG(
     start_date=pendulum.datetime(2023, 11, 4, tz="Asia/Seoul"),
     catchup=False,
     
-    dagrun_timeout=datetime.timedelta(minutes=60),
+    #dagrun_timeout=datetime.timedelta(minutes=60),
     tags=["example", "example2"],
     params={"example_key": "example_value"},
 ) as dag:
