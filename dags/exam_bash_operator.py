@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 #from __future__ import annotations
 
@@ -64,3 +65,37 @@ with DAG(
 bash_t1 >> bash_t2
 >>>>>>> 9809b1bc06d77123ccd54ab98299073803c6a0de
     
+=======
+#from __future__ import annotations
+
+from datetime import datetime
+
+import pendulum
+
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from airflow.operators.empty import EmptyOperator
+
+with DAG(
+    dag_id="dags_bash_operator",
+    schedule="0 0 * * *",
+    start_date=pendulum.datetime(2023, 11, 4, tz="Asia/Seoul"),
+    catchup=False,
+    
+    #dagrun_timeout=datetime.timedelta(minutes=60),
+    tags=["example", "example2"],
+    params={"example_key": "example_value"},
+) as dag:
+     bash_t1 = BashOperator(
+        task_id="bash_t1",
+        bash_command="echo  whoami",
+     )
+     
+     bash_t2 = BashOperator(
+        task_id="bash_t2",
+        bash_command="echo  $HOSTNAME",
+     )
+    
+bash_t1 >> bash_t2
+    
+>>>>>>> Stashed changes
